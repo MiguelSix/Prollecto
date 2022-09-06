@@ -1,0 +1,15 @@
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\bin\Debug\net6.0\Prollecto.exe
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\bin\Debug\net6.0\Prollecto.deps.json
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\bin\Debug\net6.0\Prollecto.runtimeconfig.json
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\bin\Debug\net6.0\Prollecto.dll
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\bin\Debug\net6.0\Prollecto.pdb
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.csproj.AssemblyReference.cache
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.AssemblyInfoInputs.cache
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.AssemblyInfo.cs
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.csproj.CoreCompileInputs.cache
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.dll
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\refint\Prollecto.dll
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.pdb
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\Prollecto.genruntimeconfig.cache
+C:\Users\wachi\OneDrive\Escritorio\Prollecto\obj\Debug\net6.0\ref\Prollecto.dll
