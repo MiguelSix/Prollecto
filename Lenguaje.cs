@@ -54,6 +54,14 @@ namespace Prollecto
             return false;
         }
 
+        private void modificaValor(string nombre, float nuevoValor) {
+            foreach(Variable v in variables){
+                if(v.getNombre().Equals(nombre)) {
+                    v.setValor(nuevoValor);
+                }
+            }
+        }
+
         //Programa  -> Librerias? Variables? Main
         public void Programa()
         {
@@ -199,13 +207,15 @@ namespace Prollecto
             }
             log.WriteLine();
             log.Write(getContenido() + " = ");
+            string nombreVariable = getContenido();
             match(Tipos.Identificador);
             match(Tipos.Asignacion);
-            
             Expresion();
             match(";");
-            log.WriteLine("= " + stack.Pop());
+            float resultado = stack.Pop();
+            log.WriteLine("= " + resultado);
             log.WriteLine();
+            modificaValor(nombreVariable, resultado);
         }
 
         //While -> while(Condicion) bloque de instrucciones | instruccion
@@ -403,7 +413,6 @@ namespace Prollecto
             else if(ct == 3)
                 Console.Write("\t\t\t" + aux);
             
-
             match(Tipos.Cadena);
             match(")");
             match(Tipos.FinSentencia); //(";")
