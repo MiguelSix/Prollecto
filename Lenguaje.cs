@@ -53,7 +53,7 @@ namespace Prollecto
             }
             return false;
         }
-
+        //Requerimiento 3:
         private void modificaValor(string nombre, float nuevoValor) {
             foreach(Variable v in variables){
                 if(v.getNombre().Equals(nombre)) {
@@ -215,6 +215,7 @@ namespace Prollecto
             float resultado = stack.Pop();
             log.WriteLine("= " + resultado);
             log.WriteLine();
+            //Requerimiento 3:
             modificaValor(nombreVariable, resultado);
         }
 
