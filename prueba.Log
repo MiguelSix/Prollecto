@@ -1,7 +1,10 @@
 Archivo: C:\Users\wachi\OneDrive\Escritorio\Prollecto\prueba.cpp
-Fecha: 06/09/2022 9:33:30
+Fecha: 07/09/2022 9:27:46
 
-a = 3 5 + 8 * 10 4 - 2 / - = 61
+x = 10 = 10
+
+
+a = 3 5 + 8 * x 4 - 2 / - = 61
 
 resultado, Float, 0
 a, Int, 61
@@ -11,5 +14,5 @@ d, Int, 0
 opcion, Char, 0
 radio, Float, 0
 altura, Float, 0
-x, Float, 0
+x, Float, 10
 Fin de compilacion

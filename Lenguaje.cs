@@ -34,6 +34,22 @@ namespace Prollecto
         {
 
         }
+        private void secuenciasEscape(string cadena){
+            //Eliminamos las comillas de la cadena
+            cadena = cadena.Trim('"');
+            bool existeSecuencia = true;
+            int contSalto = 0, contTab = 0;
+
+            while(existeSecuencia){
+                if(cadena.StartsWith("\\n")){   //Saltos de linea
+                    contSalto++;
+                    cadena = cadena.Remove(0,2);
+                }else if(cadena.StartsWith("\\t")){     //Tabulador
+                contTab++;
+                cadena = cadena.Remove(0,2);
+                }
+            }
+        }
 
         private void addVariable(string nombre, Variable.TipoDato tipo){
             variables.Add(new Variable(nombre, tipo));
@@ -60,6 +76,15 @@ namespace Prollecto
                     v.setValor(nuevoValor);
                 }
             }
+        }
+
+        private float getValor(string nombreVariable){
+            foreach(Variable v in variables){
+                if(v.getNombre().Equals(nombreVariable)) {
+                    return v.getValor();
+                }
+            }
+            return 0;
         }
 
         //Programa  -> Librerias? Variables? Main
@@ -498,6 +523,9 @@ namespace Prollecto
             }
             else if (getClasificacion() == Tipos.Identificador)
             {
+
+            log.Write(getContenido() + " ");
+            stack.Push(getValor(getContenido()));
             //Requerimiento 2.-
             if(!existeVariable(getContenido())){
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
