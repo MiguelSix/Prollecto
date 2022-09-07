@@ -1,16 +1,20 @@
 Archivo: C:\Users\wachi\OneDrive\Escritorio\Prollecto\prueba.cpp
-Fecha: 07/09/2022 9:27:46
+Fecha: 07/09/2022 12:44:48
 
 x = 10 = 10
 
 
-a = 3 5 + 8 * x 4 - 2 / - = 61
+c = 0 = 0
 
+3 5 + 8 * x 4 - 2 / - 
+
+Variables:
 resultado, Float, 0
-a, Int, 61
+a, Int, 0
 b, Int, 0
 c, Int, 0
 d, Int, 0
+i, Int, 0
 opcion, Char, 0
 radio, Float, 0
 altura, Float, 0

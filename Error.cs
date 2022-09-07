@@ -9,7 +9,9 @@ namespace Prollecto
     {
         public Error(string mensaje, StreamWriter log)
         {
+            Console.WriteLine();
             Console.WriteLine(mensaje);
+            log.WriteLine();
             log.WriteLine(mensaje);
         }
     }

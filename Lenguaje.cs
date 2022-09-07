@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 // 1.Eliminar las comillas del printf e interpretar las secuencias de escape de la cadena
 // 2.Marcar los errorres sintacticos cuando la variable no exista
 // 3.Modificar el valor de la variable en la asignacion
+// 4.Obtener el valor de la variable cuando se requiera y programar el metodo getValor
 
 namespace Prollecto
 {
@@ -49,6 +50,14 @@ namespace Prollecto
                 cadena = cadena.Remove(0,2);
                 }
             }
+            switch(contTab){
+                case 0: Console.WriteLine(cadena); break;
+                case 1: Console.Write("\n" + cadena); break;
+                case 2: Console.Write("\n\n" + cadena); break;
+                case 3: Console.WriteLine("\n\n\n" + cadena); break;
+            }
+
+
         }
 
         private void addVariable(string nombre, Variable.TipoDato tipo){
@@ -56,6 +65,7 @@ namespace Prollecto
         }
 
         private void displayVariables(){
+            log.WriteLine("\n\nVariables:");
             foreach(Variable v in variables){
                 log.WriteLine(v.getNombre() + ", " + v.getTipoDato() + ", " + v.getValor());
             }
@@ -78,6 +88,7 @@ namespace Prollecto
             }
         }
 
+        //Requerimiento 4:
         private float getValor(string nombreVariable){
             foreach(Variable v in variables){
                 if(v.getNombre().Equals(nombreVariable)) {
@@ -230,6 +241,7 @@ namespace Prollecto
             if(!existeVariable(getContenido())){
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
             }
+
             log.WriteLine();
             log.Write(getContenido() + " = ");
             string nombreVariable = getContenido();
@@ -306,15 +318,19 @@ namespace Prollecto
             if(!existeVariable(getContenido())){
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
             }
+            string variable = getContenido();
             match(Tipos.Identificador);
             if(getContenido() == "++")
             {
+                modificaValor(variable, getValor(variable) + 1);
                 match("++");
             }
             else if(getContenido() == "--")
             {
+                modificaValor(variable, getValor(variable) - 1);
                 match("--");
             }
+            //match(";");
         }
 
         //Switch -> switch (Expresion) {Lista de casos} | (default: )
@@ -323,6 +339,7 @@ namespace Prollecto
             match("switch");
             match("(");
             Expresion();
+            stack.Pop();
             match(")");
             match("{");
             ListaDeCasos();
@@ -345,6 +362,7 @@ namespace Prollecto
         {
             match("case");
             Expresion();
+            stack.Pop();
             match(":");
             ListaInstruccionesCase();
             if(getContenido() == "break")
@@ -362,8 +380,10 @@ namespace Prollecto
         private void Condicion()
         {
             Expresion();
+            stack.Pop();
             match(Tipos.OperadorRelacional);
             Expresion();
+            stack.Pop();
         }
 
         //If -> if(Condicion) bloque de instrucciones (else bloque de instrucciones)?
@@ -395,12 +415,13 @@ namespace Prollecto
             }
         }
 
-        //Printf -> printf(cadena);
+        //Printf -> printf(cadena || expresion);
         private void Printf()
         {
             match("printf");
             match("(");
 
+            if(getClasificacion() == Tipos.Cadena){
             //Eliminamos las comillas y las imprimimos en la consola 
             String aux = getContenido();
             aux = aux.Trim('"');
@@ -438,13 +459,19 @@ namespace Prollecto
                 Console.Write("\t\t" + aux);   
             else if(ct == 3)
                 Console.Write("\t\t\t" + aux);
-            
-            match(Tipos.Cadena);
+
+
+                match(Tipos.Cadena);
+
+            }else{
+                Expresion();
+                Console.Write(stack.Pop());
+            }
             match(")");
             match(Tipos.FinSentencia); //(";")
         }
 
-        //Scanf -> scanf(cadena);
+        //Scanf -> scanf(cadena  -> , -> & -> identificador);
         private void Scanf()    
         {
             match("scanf");
