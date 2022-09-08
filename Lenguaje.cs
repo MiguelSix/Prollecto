@@ -499,6 +499,13 @@ namespace Prollecto
             match("scanf");
             match("(");
             match(Tipos.Cadena);
+            match("&");
+            //Requerimiento 2.-
+            if(!existeVariable(getContenido())){
+                throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
+            }
+            string valor = "" + Console.ReadLine();
+            match(Tipos.Identificador);
             match(")");
             match(";");
         }
