@@ -12,7 +12,9 @@ void main(){
     c = 0;
     //a=(3+5)*8 - (x-4)/2;
     printf((3+5)*8 - (x-4)/2);
-    //c++;
+    printf("Hola");
+    printf("\na");
+    c++;
 
     /*
     for(i=0; i<10; i++){
