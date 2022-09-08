@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 // 2.Marcar los errorres sintacticos cuando la variable no exista
 // 3.Modificar el valor de la variable en la asignacion
 // 4.Obtener el valor de la variable cuando se requiera y programar el metodo getValor
+// 5.Modificar el valor de la variable en el scanf
 
 namespace Prollecto
 {
@@ -40,26 +41,10 @@ namespace Prollecto
             //Usar un for recorriendo la cadena
             //Eliminamos las comillas de la cadena
             cadena = cadena.Trim('"');
-            bool existeSecuencia = true;
-            int contSalto = 0, contTab = 0;
-
-            while(existeSecuencia){
-                if(cadena.StartsWith("\\n")){   //Saltos de linea
-                    contSalto++;
-                    cadena = cadena.Remove(0,2);
-                }else if(cadena.StartsWith("\\t")){     //Tabulador
-                contTab++;
-                cadena = cadena.Remove(0,2);
-                }
-            }
-            switch(contTab){
-                case 0: Console.WriteLine(cadena); break;
-                case 1: Console.Write("\n" + cadena); break;
-                case 2: Console.Write("\n\n" + cadena); break;
-                case 3: Console.WriteLine("\n\n\n" + cadena); break;
-            }
-
-
+            //Console.WriteLine(cadena);
+            cadena = cadena.Replace("\\n", "\n");
+            cadena = cadena.Replace("\\t", "\t");
+            Console.Write(cadena);
         }
 
         private void addVariable(string nombre, Variable.TipoDato tipo){
@@ -446,44 +431,8 @@ namespace Prollecto
             if(getClasificacion() == Tipos.Cadena){
             //Eliminamos las comillas y las imprimimos en la consola 
             String aux = getContenido();
-            aux = aux.Trim('"');
-            //Console.WriteLine(aux);
-
-            bool cosa = true;
-            int cn = 0, ct = 0;
-
-            while (cosa){
-                if(aux.Contains("\\n") || aux.Contains("\\t")){
-                    if(aux.Contains("\\n")){
-                        aux = aux.Remove(0,2);
-                        //Console.WriteLine("\n" + aux);
-                        cn++;
-                    }else if(aux.Contains("\\t")){
-                        aux = aux.Remove(0,2);
-                        //Console.Write("\t" + aux);
-                        ct++;
-                    }
-                    cosa = true;
-                }
-                else cosa = false;
-            }
-            if(cn  == 1){
-                Console.Write("\n" + aux);
-            }
-            else if(cn == 2)
-                Console.Write("\n\n" + aux);
-            else if(cn == 3)
-                Console.Write("\n\n\n" + aux);
-
-            if(ct  == 1)
-                Console.Write("\t" + aux);
-            else if(ct == 2)
-                Console.Write("\t\t" + aux);   
-            else if(ct == 3)
-                Console.Write("\t\t\t" + aux);
-
-
-                match(Tipos.Cadena);
+            secuenciasEscape(aux);
+            match(Tipos.Cadena);
 
             }else{
                 Expresion();
@@ -499,12 +448,15 @@ namespace Prollecto
             match("scanf");
             match("(");
             match(Tipos.Cadena);
+            match(",");
             match("&");
             //Requerimiento 2.-
             if(!existeVariable(getContenido())){
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
             }
             string valor = "" + Console.ReadLine();
+            //Requerimiento 5.
+            modificaValor(getContenido(), float.Parse(valor));
             match(Tipos.Identificador);
             match(")");
             match(";");

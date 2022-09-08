@@ -1,23 +1,16 @@
 #include <iostream>
 #include <stdio.h>
 #include <conio.h>
-float resultado;
-int a,b,c,d,i;
-char opcion;
-float radio, altura, x;
+float area, radio, pi, resultado;
+int a, b;
 // Este programa calcula el volumen de un cilindro.
 void main(){
-    printf("\n\nResultado: ");
-    x = 10;
-    c = 0;
-    //a=(3+5)*8 - (x-4)/2;
-    printf((3+5)*8 - (x-4)/2);
-    printf("Hola");
-    printf("\na");
-    c++;
-
-    /*
-    for(i=0; i<10; i++){
-    }
-    */
+    printf("\n\n\tRadio =  ");
+    scanf("%d", &radio);
+    pi = 3.141592653589793;
+    b = 4;
+    area = pi * (radio * radio);
+    b++;
+    printf("\nArea = ");
+    printf(area);
 }

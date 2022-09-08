@@ -1,23 +1,22 @@
 Archivo: C:\Users\wachi\OneDrive\Escritorio\Prollecto\prueba.cpp
-Fecha: 08/09/2022 7:37:51
+Fecha: 08/09/2022 16:58:26
 
-x = 10 = 10
+pi = 3.141592653589793 = 3.1415927
 
 
-c = 0 = 0
+b = 4 = 4
 
-3 5 + 8 * x 4 - 2 / - 
 
+area = pi radio radio * * = 78.53982
+
+
+area 
 
 Variables:
+area, Float, 78.53982
+radio, Float, 5
+pi, Float, 3.1415927
 resultado, Float, 0
 a, Int, 0
-b, Int, 0
-c, Int, 1
-d, Int, 0
-i, Int, 0
-opcion, Char, 0
-radio, Float, 0
-altura, Float, 0
-x, Float, 10
+b, Int, 5
 Fin de compilacion
