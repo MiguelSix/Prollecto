@@ -38,7 +38,6 @@ namespace Prollecto
         }
         private void secuenciasEscape(string cadena){
 
-            //Usar un for recorriendo la cadena
             //Eliminamos las comillas de la cadena
             cadena = cadena.Trim('"');
             //Console.WriteLine(cadena);
@@ -232,22 +231,15 @@ namespace Prollecto
             log.WriteLine();
             string nombreVariable = getContenido();
             match(Tipos.Identificador);
-
-            if(getContenido() == "++" || getContenido() == "--"){
-                //Console.WriteLine("Entra a Incremento");
-                IncrementoVar(nombreVariable);
-            }
-            else{
-                log.Write(nombreVariable + " = ");
-                match(Tipos.Asignacion);
-                Expresion();
-                match(";");
-                float resultado = stack.Pop();
-                log.WriteLine("= " + resultado);
-                log.WriteLine();
-                //Requerimiento 3:
-                modificaValor(nombreVariable, resultado);
-            }
+            log.Write(nombreVariable + " = ");
+            match(Tipos.Asignacion);
+            Expresion();
+            match(";");
+            float resultado = stack.Pop();
+            log.WriteLine("= " + resultado);
+            log.WriteLine();
+            //Requerimiento 3:
+            modificaValor(nombreVariable, resultado);
         }
 
         //While -> while(Condicion) bloque de instrucciones | instruccion
@@ -325,19 +317,6 @@ namespace Prollecto
                 match("--");
             }
             //match(";");
-        }
-
-        private void IncrementoVar(string variable){
-            if(getContenido() == "--"){
-                modificaValor(variable, getValor(variable) - 1);
-                match("--");
-            }
-            else if(getContenido() == "++"){
-                modificaValor(variable, getValor(variable) + 1);
-                match("++");
-            }
-            //Console.WriteLine(getContenido());
-            match(Tipos.FinSentencia);
         }
 
         //Switch -> switch (Expresion) {Lista de casos} | (default: )
