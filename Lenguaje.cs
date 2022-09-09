@@ -36,8 +36,8 @@ namespace Prollecto
         {
 
         }
-        private void secuenciasEscape(string cadena){
-
+        private void secuenciasEscape(string cadena)
+        {
             //Eliminamos las comillas de la cadena
             cadena = cadena.Trim('"');
             //Console.WriteLine(cadena);
@@ -46,38 +46,49 @@ namespace Prollecto
             Console.Write(cadena);
         }
 
-        private void addVariable(string nombre, Variable.TipoDato tipo){
+        private void addVariable(string nombre, Variable.TipoDato tipo)
+        {
             variables.Add(new Variable(nombre, tipo));
         }
 
-        private void displayVariables(){
+        private void displayVariables()
+        {
             log.WriteLine("\n\nVariables:");
             foreach(Variable v in variables){
                 log.WriteLine(v.getNombre() + ", " + v.getTipoDato() + ", " + v.getValor());
             }
         }
 
-        private bool existeVariable(string nombre){
-            foreach(Variable v in variables){
-                if(v.getNombre().Equals(nombre)){
+        private bool existeVariable(string nombre)
+        {
+            foreach(Variable v in variables)
+            {
+                if(v.getNombre().Equals(nombre))
+                {
                     return true;
                 }
             }
             return false;
         }
         //Requerimiento 3:
-        private void modificaValor(string nombre, float nuevoValor) {
-            foreach(Variable v in variables){
-                if(v.getNombre().Equals(nombre)) {
+        private void modificaValor(string nombre, float nuevoValor) 
+        {
+            foreach(Variable v in variables)
+            {
+                if(v.getNombre().Equals(nombre)) 
+                {
                     v.setValor(nuevoValor);
                 }
             }
         }
 
         //Requerimiento 4:
-        private float getValor(string nombreVariable){
-            foreach(Variable v in variables){
-                if(v.getNombre().Equals(nombreVariable)) {
+        private float getValor(string nombreVariable)
+        {
+            foreach(Variable v in variables)
+            {
+                if(v.getNombre().Equals(nombreVariable)) 
+                {
                     return v.getValor();
                 }
             }
@@ -139,9 +150,11 @@ namespace Prollecto
         private void Lista_identificadores(Variable.TipoDato tipo)
         {
             if (getClasificacion() == Tipos.Identificador){
-                if(!existeVariable(getContenido())){
+                if(!existeVariable(getContenido()))
+                {
                     addVariable(getContenido(), tipo);
-                }else{
+                }else
+                {
                     throw new Error("Error de sintaxis, variable duplicada <"+ getContenido() + "> en la linea: " + linea, log);
                 }
             }
@@ -224,7 +237,8 @@ namespace Prollecto
         private void Asignacion()
         {
             //Requerimiento 2.-
-            if(!existeVariable(getContenido())){
+            if(!existeVariable(getContenido()))
+            {
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
             }
 
@@ -249,7 +263,7 @@ namespace Prollecto
             match("(");
             Condicion();
             match(")");
-             if (getContenido() == "{") 
+            if (getContenido() == "{") 
             {
                 BloqueInstrucciones();
             }
@@ -301,7 +315,8 @@ namespace Prollecto
         private void Incremento()
         {
             //Requerimiento 2.-
-            if(!existeVariable(getContenido())){
+            if(!existeVariable(getContenido()))
+            {
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
             }
             string variable = getContenido();
@@ -407,13 +422,15 @@ namespace Prollecto
             match("printf");
             match("(");
 
-            if(getClasificacion() == Tipos.Cadena){
-            //Eliminamos las comillas y las imprimimos en la consola 
+            if(getClasificacion() == Tipos.Cadena)
+            {
             String aux = getContenido();
             secuenciasEscape(aux);
             match(Tipos.Cadena);
 
-            }else{
+            }
+            else
+            {
                 Expresion();
                 Console.Write(stack.Pop());
             }
@@ -430,11 +447,12 @@ namespace Prollecto
             match(",");
             match("&");
             //Requerimiento 2.-
-            if(!existeVariable(getContenido())){
+            if(!existeVariable(getContenido()))
+            {
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
             }
             string valor = "" + Console.ReadLine();
-            //Requerimiento 5.
+            //Requerimiento 5
             modificaValor(getContenido(), float.Parse(valor));
             match(Tipos.Identificador);
             match(")");
@@ -468,10 +486,10 @@ namespace Prollecto
                 log.Write(operador + " ");
                 float n1 = stack.Pop();
                 float n2 = stack.Pop();
-                switch (operador){
+                switch (operador)
+                {
                     case "+": stack.Push(n2 + n1); break;
                     case "-": stack.Push(n2 - n1); break;
-
                 }
             }
         }
@@ -492,10 +510,10 @@ namespace Prollecto
                 log.Write(operador + " ");
                 float n1 = stack.Pop();
                 float n2 = stack.Pop();
-                switch (operador){
+                switch (operador)
+                {
                     case "*": stack.Push(n2 * n1); break;
                     case "/": stack.Push(n2 / n1); break;
-
                 }
             }
         }
@@ -510,11 +528,11 @@ namespace Prollecto
             }
             else if (getClasificacion() == Tipos.Identificador)
             {
-
             log.Write(getContenido() + " ");
             stack.Push(getValor(getContenido()));
-            //Requerimiento 2.-
-            if(!existeVariable(getContenido())){
+            //Requerimiento 2
+            if(!existeVariable(getContenido()))
+            {
                 throw new Error("\nError de sintaxis en la linea: " + linea + ", la variable <"+ getContenido() + "> no existe", log);
             }
                 match(Tipos.Identificador);
@@ -526,6 +544,5 @@ namespace Prollecto
                 match(")");
             }
         }
-        
     }
 }
